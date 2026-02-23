@@ -1,0 +1,71 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://pranavsood888_db_user:Tatabus1212@bhaktiappcluster.fyosdr3.mongodb.net/BhaktiApp?retryWrites=true&w=majority&appName=BhaktiAppCluster
+      auto-index-creation: true
+    redis:
+      host: redis-11307.c264.ap-south-1-1.ec2.cloud.redislabs.com
+      port: 11307
+      password: 67wYfLJpH8ujqxvOLGYVlFbY9L5DaDBa
+      #67wYfLJpH8ujqxvOLGYVlFbY9L5DaDBa
+      connect-timeout: 10000ms
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin:
+      # 3. Don't let the app 'hang' during startup if Kafka is gone
+      fail-fast: false
+    producer:
+      # Key is usually a String (like username)
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # Value is your DTO, so we MUST use JsonSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        # This ensures the JSON is clean and readable
+        spring.json.add.type.headers: true
+        # 1. The 'Stop the Spin' setting (Force fail after 2 seconds)
+        max.block.ms: 2000
+        # 2. Don't retry 100 times; just fail and let us handle it
+        retries: 0
+
+
+        retry.backoff.ms: 10000
+
+    consumer:
+      group-id: bhajan-group
+      auto-offset-reset: earliest # Start reading from the beginning if no offset exists
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.example.MyAPP.dto" # IMPORTANT: Add your DTO package here
+        reconnect.backoff.ms: 10000 # Wait 10 seconds between "screams"
+        reconnect.backoff.max.ms: 30000
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pranavsood888@gmail.com
+    password: uppu pizm scjn alhr
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+            protocols: TLSv1.2
+            connectiontimeout: 5000
+            timeout: 5000
+            writetimeout: 5000
+
+
+
+youtube:
+  api:
+    key: AIzaSyBWfa568BpQPgBikil303Dmphl8255L3Sw
+
+
+
