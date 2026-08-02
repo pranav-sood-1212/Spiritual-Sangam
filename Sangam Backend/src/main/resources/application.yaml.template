@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/usersdb
+    username: YOUR_MYSQL_USERNAME
+    password: YOUR_MYSQL_PASSWORD
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        physical_naming_strategy: org.springframework.boot.jpa.hibernate.SpringPhysicalNamingStrategy
+    show-sql: true
+
+  data:
+    mongodb:
+      uri: mongodb+srv://YOUR_MONGO_USER:YOUR_MONGO_PASS@sangamconnectcluster.rfssglm.mongodb.net/connectdb?retryWrites=true&w=majority
+    redis:
+      host: YOUR_REDIS_HOST
+      port: 6379
+      password: YOUR_REDIS_PASSWORD
